@@ -1,7 +1,9 @@
 package org.example.gestionproduitonline.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -19,15 +21,23 @@ public class Product {
 
     private String categorie;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rating> ratings = new ArrayList<>();
+
     public Product() {}
 
-    public Product(Long id, String nom, String description, Long prix, Long quantiteStock, String categorie) {
+    public Product(Long id) {
+        this.id = id;
+    }
+
+    public Product(Long id, String nom, String description, Long prix, Long quantiteStock, String categorie, List<Rating> ratings) {
         this.id = id;
         this.nom = nom;
         this.description = description;
         this.prix = prix;
         this.quantiteStock = quantiteStock;
         this.categorie = categorie;
+        this.ratings = ratings;
     }
 
     public Long getId() {
@@ -76,5 +86,13 @@ public class Product {
 
     public void setCategorie(String categorie) {
         this.categorie = categorie;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 }
