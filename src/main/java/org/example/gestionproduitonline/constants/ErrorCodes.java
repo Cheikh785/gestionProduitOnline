@@ -7,4 +7,5 @@ public enum ErrorCodes {
     USER_ALREADY_EXISTS,
     PRODUCT_NOT_FOUND,
     PRODUCT_ALREADY_EXISTS,
+    NOT_ALLOWED,
 }
